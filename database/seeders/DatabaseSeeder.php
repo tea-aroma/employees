@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,11 +14,46 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $this->call(PositionsSeeder::class);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $this->call(DepartmentsSeeder::class);
+
+        $this->call(EmployeeStatusesSeeder::class);
+
+        $this->call(CarBrandsSeeder::class);
+
+        $this->call(CarColorsSeeder::class);
+
+        $this->call(CarModelsSeeder::class);
+
+        $this->call(CarTypesSeeder::class);
+
+        $this->call(CarComfortsSeeder::class);
+
+        $this->call(CarStatusesSeeder::class);
+
+        $this->call(ScheduleStatusesSeeder::class);
+
+        $this->call(CarsSeeder::class);
+
+        $this->call(EmployeesSeeder::class);
+
+        $this->call(CompanyCarsSeeder::class);
+    }
+
+    /**
+     * Creates records by the specified arguments.
+     *
+     * @param array $records
+     * @param Model $model
+     *
+     * @return void
+     */
+    public static function createRecords(array $records, Model $model): void
+    {
+        foreach ($records as $record)
+        {
+            $model->newQuery()->create($record);
+        }
     }
 }
