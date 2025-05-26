@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('car_brand_id')->references('id')->on('car_brands')->nullOnDelete();
             $table->foreignId('car_model_id')->references('id')->on('car_models')->nullOnDelete();
             $table->foreignId('car_type_id')->references('id')->on('car_types')->nullOnDelete();
             $table->foreignId('car_comfort_id')->references('id')->on('car_comforts')->nullOnDelete();

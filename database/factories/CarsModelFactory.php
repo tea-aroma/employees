@@ -30,6 +30,7 @@ class CarsModelFactory extends Factory
         self::$sortOrder += 10;
 
         return [
+            'car_brand_id' => $this->faker->numberBetween(1, 6),
             'car_model_id' => $this->faker->numberBetween(1, 12),
             'car_type_id' => $this->faker->numberBetween(1, 6),
             'car_comfort_id' => $this->faker->numberBetween(1, 6),

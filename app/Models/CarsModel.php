@@ -21,6 +21,7 @@ class CarsModel extends Model
      */
     protected $fillable =
         [
+            'car_brand_id',
             'car_model_id',
             'car_type_id',
             'car_comfort_id',
@@ -28,6 +29,14 @@ class CarsModel extends Model
             'sort_order',
             'is_active',
         ];
+
+    /**
+     * @return BelongsTo
+     */
+    public function carBrand(): BelongsTo
+    {
+        return $this->belongsTo(CarBrandsModel::class, 'car_brand_id');
+    }
 
     /**
      * @return BelongsTo
