@@ -5,12 +5,12 @@ namespace App\Repositories;
 
 use App\Data\ClassifierData;
 use App\Standards\Data\Interfaces\OptionsInterface;
+use App\Standards\Enums\CacheTag;
 use App\Standards\Repositories\Abstracts\Repository;
 use App\Standards\Repositories\Interfaces\FindInterface;
 use App\Standards\Repositories\Interfaces\ForModelInterface;
 use App\Standards\Repositories\Interfaces\ReadInterface;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Cache;
 
 
 /**
@@ -18,6 +18,13 @@ use Illuminate\Support\Facades\Cache;
  */
 class ClassifierRepository extends Repository implements ForModelInterface, ReadInterface, FindInterface
 {
+    /**
+     * @inheritdoc
+     *
+     * @var CacheTag
+     */
+    protected CacheTag $cacheTag = CacheTag::CLASSIFIERS;
+
     /**
      * @inheritDoc
      *
@@ -39,7 +46,7 @@ class ClassifierRepository extends Repository implements ForModelInterface, Read
      */
     public function records(OptionsInterface $options): Collection
     {
-        return Cache::tags('classifiers')->remember($options->toSha512(), 3600, function () use ($options)
+        return $this->cacheRepository->remember($options->toSha512(), function () use ($options)
         {
             return $this->map($this->model->newQuery()->get(), ClassifierData::class);
         });
@@ -54,7 +61,7 @@ class ClassifierRepository extends Repository implements ForModelInterface, Read
      */
     public function find(int $id): ?ClassifierData
     {
-        return Cache::tags('classifiers')->remember($id, 3600, function () use ($id)
+        return $this->cacheRepository->remember($id, function () use ($id)
         {
             return ClassifierData::fromModel($this->model->newQuery()->findOrFail($id));
         });

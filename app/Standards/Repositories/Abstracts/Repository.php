@@ -3,7 +3,10 @@
 namespace App\Standards\Repositories\Abstracts;
 
 
+use App\Standards\CacheRepository\Classes\CacheRepository;
 use App\Standards\Data\Abstracts\Data;
+use App\Standards\Enums\CacheTag;
+use App\Standards\Enums\CacheTTL;
 use App\Standards\Repositories\Callbacks\MapCallback;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -30,11 +33,34 @@ abstract class Repository
     protected Model $model;
 
     /**
+     * The cache tag.
+     *
+     * @var CacheTag
+     */
+    protected CacheTag $cacheTag;
+
+    /**
+     * The cache ttl.
+     *
+     * @var CacheTTL
+     */
+    protected CacheTTL $ttl = CacheTTL::DEFAULT;
+
+    /**
+     * The cache repository instance.
+     *
+     * @var CacheRepository
+     */
+    protected CacheRepository $cacheRepository;
+
+    /**
      * The construct.
      */
     public function __construct(?string $modelNamespace = null)
     {
-        $this->model = new $modelNamespace() ?? new $this->modelNamespace();
+        $this->model = new ($modelNamespace ?? $this->modelNamespace)();
+
+        $this->cacheRepository = new CacheRepository($this->cacheTag, $this, $this->ttl);
     }
 
     /**
