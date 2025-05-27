@@ -22,18 +22,18 @@ class CarModelsSeeder extends Seeder
     protected function getRecords(): array
     {
         return [
-            [ 'id' => 1, 'car_brand_id' => 1, 'name' => 'Unknown A', 'code' => 'unknown-a' ],
-            [ 'id' => 2, 'car_brand_id' => 1, 'name' => 'Unknown B', 'code' => 'unknown-b' ],
-            [ 'id' => 3, 'car_brand_id' => 2, 'name' => 'BMW 3 Series', 'code' => 'bmw-3=series' ],
-            [ 'id' => 4, 'car_brand_id' => 2, 'name' => 'BMW X5', 'code' => 'bmw-x5' ],
-            [ 'id' => 5, 'car_brand_id' => 3, 'name' => 'Honda Civic', 'code' => 'honda-civic' ],
-            [ 'id' => 6, 'car_brand_id' => 3, 'name' => 'Honda CR-V', 'code' => 'honda-cr-v' ],
-            [ 'id' => 7, 'car_brand_id' => 4, 'name' => 'Ford Focus', 'code' => 'ford-focus' ],
-            [ 'id' => 8, 'car_brand_id' => 4, 'name' => 'Ford Explorer', 'code' => 'ford-explorer' ],
-            [ 'id' => 9, 'car_brand_id' => 5, 'name' => 'Mercedes-Benz C-Class', 'code' => 'mercedes-benz-c-class' ],
-            [ 'id' => 10, 'car_brand_id' => 5, 'name' => 'Mercedes-Benz GLE', 'code' => 'mercedes-benz-gle' ],
-            [ 'id' => 11, 'car_brand_id' => 6, 'name' => 'Toyota Corolla', 'code' => 'toyota-corolla' ],
-            [ 'id' => 12, 'car_brand_id' => 6, 'name' => 'Toyota Camry', 'code' => 'toyota-camry' ],
+            [ 'id' => 1, 'name' => 'Unknown A', 'code' => 'unknown-a' ],
+            [ 'id' => 2, 'name' => 'Unknown B', 'code' => 'unknown-b' ],
+            [ 'id' => 3, 'name' => 'BMW 3 Series', 'code' => 'bmw-3=series' ],
+            [ 'id' => 4, 'name' => 'BMW X5', 'code' => 'bmw-x5' ],
+            [ 'id' => 5, 'name' => 'Honda Civic', 'code' => 'honda-civic' ],
+            [ 'id' => 6, 'name' => 'Honda CR-V', 'code' => 'honda-cr-v' ],
+            [ 'id' => 7, 'name' => 'Ford Focus', 'code' => 'ford-focus' ],
+            [ 'id' => 8, 'name' => 'Ford Explorer', 'code' => 'ford-explorer' ],
+            [ 'id' => 9, 'name' => 'Mercedes-Benz C-Class', 'code' => 'mercedes-benz-c-class' ],
+            [ 'id' => 10, 'name' => 'Mercedes-Benz GLE', 'code' => 'mercedes-benz-gle' ],
+            [ 'id' => 11, 'name' => 'Toyota Corolla', 'code' => 'toyota-corolla' ],
+            [ 'id' => 12, 'name' => 'Toyota Camry', 'code' => 'toyota-camry' ],
         ];
     }
 }

@@ -31,8 +31,8 @@ class CompanyCarsModelFactory extends Factory
         self::$sortOrder += 10;
 
         return [
-            'car_id' => $this->faker->unique()->numberBetween(1, 10),
-            'employee_id' => $this->faker->unique()->numberBetween(1, 40),
+            'car_id' => $this->faker->unique()->numberBetween(1, 15),
+            'employee_id' => $this->faker->unique()->numberBetween(1, 20),
             'car_status_id' => $this->faker->numberBetween(1, 4),
             'car_color_id' => $this->faker->numberBetween(1, 6),
             'license_plate' => $this->faker->ean8(),
