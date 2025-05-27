@@ -58,7 +58,12 @@ abstract class Repository
      */
     public function __construct(?string $modelNamespace = null)
     {
-        $this->model = new ($modelNamespace ?? $this->modelNamespace)();
+        if ($modelNamespace)
+        {
+            $this->modelNamespace = $modelNamespace;
+        }
+
+        $this->model = new $this->modelNamespace();
 
         $this->cacheRepository = new CacheRepository($this->cacheTag, $this, $this->ttl);
     }

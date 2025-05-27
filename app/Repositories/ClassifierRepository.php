@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 
-use App\Data\ClassifierData;
+use App\Data\Classifiers\ClassifierData;
 use App\Standards\Data\Interfaces\OptionsInterface;
 use App\Standards\Enums\CacheTag;
 use App\Standards\Repositories\Abstracts\Repository;
@@ -46,7 +46,7 @@ class ClassifierRepository extends Repository implements ForModelInterface, Read
      */
     public function records(OptionsInterface $options): Collection
     {
-        return $this->cacheRepository->remember($options->toSha512(), function () use ($options)
+        return $this->cacheRepository->remember($this->modelNamespace . $options->toSha512(), function () use ($options)
         {
             return $this->map($this->model->newQuery()->get(), ClassifierData::class);
         });
@@ -61,9 +61,9 @@ class ClassifierRepository extends Repository implements ForModelInterface, Read
      */
     public function find(int $id): ?ClassifierData
     {
-        return $this->cacheRepository->remember($id, function () use ($id)
+        return $this->cacheRepository->remember($this->modelNamespace . $id, function () use ($id)
         {
-            return ClassifierData::fromModel($this->model->newQuery()->findOrFail($id));
+            return ClassifierData::fromModel($this->model->newQuery()->find($id));
         });
     }
 }
