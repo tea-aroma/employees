@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Data;
+namespace App\Data\Classifiers;
 
 
 use App\Standards\Data\Interfaces\AttributesInterface;

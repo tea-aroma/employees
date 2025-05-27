@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Data;
+namespace App\Data\Classifiers;
 
 
 use App\Standards\Data\Abstracts\Data;
@@ -11,6 +11,11 @@ use App\Standards\Data\Abstracts\Data;
  */
 class ClassifierData extends Data
 {
+    /**
+     * @var int
+     */
+    public int $id;
+
     /**
      * @var string
      */
@@ -35,4 +40,15 @@ class ClassifierData extends Data
      * @var bool
      */
     public bool $is_active;
+
+    /**
+     * @var string
+     */
+    public string $created_at;
+
+    /**
+     * @var string
+     */
+    public string $updated_at;
+
 }
