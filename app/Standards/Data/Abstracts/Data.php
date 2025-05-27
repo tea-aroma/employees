@@ -3,6 +3,8 @@
 namespace App\Standards\Data\Abstracts;
 
 
+use App\Standards\Data\Callbacks\MapCallback;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -62,6 +64,18 @@ abstract class Data
         $instance->model = $model;
 
         return $instance;
+    }
+
+    /**
+     * Maps each model of the specified collection to current type.
+     *
+     * @param Collection $collection
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public static function map(Collection $collection): \Illuminate\Support\Collection
+    {
+        return $collection->map(new MapCallback(static::class));
     }
 
     /**

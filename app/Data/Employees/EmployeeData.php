@@ -3,8 +3,10 @@
 namespace App\Data\Employees;
 
 
+use App\Data\Classifiers\ClassifierData;
 use App\Standards\Data\Abstracts\Data;
 use App\Standards\Data\Traits\HasClassifier;
+use Illuminate\Support\Collection;
 
 
 /**
@@ -78,4 +80,12 @@ class EmployeeData extends Data
      * @var string
      */
     public string $deleted_at;
+
+    /**
+     * @return Collection<ClassifierData>
+     */
+    public function carComforts(): Collection
+    {
+        return ClassifierData::map($this->model->carComforts);
+    }
 }
