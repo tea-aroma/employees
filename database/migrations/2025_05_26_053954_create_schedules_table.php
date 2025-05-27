@@ -17,9 +17,9 @@ return new class extends Migration
             $table->foreignId('company_car_id')->references('id')->on('company_cars')->nullOnDelete();
             $table->foreignId('employee_id')->references('id')->on('employees')->cascadeOnDelete();
             $table->foreignId('trip_type_id')->references('id')->on('trip_types')->cascadeOnDelete();
-            $table->timestamp('start_time');
+            $table->string('description');
+            $table->timestamp('start_time')->useCurrent();
             $table->timestamp('end_time');
-            $table->timestamp('description');
             $table->timestamps();
         });
     }

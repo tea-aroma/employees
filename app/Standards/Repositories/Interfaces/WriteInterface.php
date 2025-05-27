@@ -13,11 +13,11 @@ use App\Standards\Data\Interfaces\AttributesInterface;
 interface WriteInterface
 {
     /**
-     * Writes a record by the specified attributes.
+     * Writes a record by the specified values.
      *
-     * @param AttributesInterface $attributes
+     * @param AttributesInterface $values
      *
      * @return Data
      */
-    public function write(AttributesInterface $attributes): Data;
+    public function write(AttributesInterface $values): Data;
 }
