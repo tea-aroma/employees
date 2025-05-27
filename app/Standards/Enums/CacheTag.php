@@ -12,6 +12,8 @@ enum CacheTag: string
 
     case CARS = 'CARS';
 
+    case COMPANY_CARS = 'COMPANY_CARS';
+
     case EMPLOYEES = 'EMPLOYEES';
 
     case SCHEDULES = 'SCHEDULES';
