@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 
 class EmployeesModel extends Model
@@ -54,5 +55,13 @@ class EmployeesModel extends Model
     public function employeeStatus(): BelongsTo
     {
         return $this->belongsTo(EmployeeStatusesModel::class, 'employee_status_id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function carComforts(): BelongsToMany
+    {
+        return $this->belongsToMany(CarComfortsModel::class, 'positions_to_car_comforts', 'position_id', 'car_comfort_id', 'position_id', 'id');
     }
 }
