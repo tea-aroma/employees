@@ -20,4 +20,14 @@ class HomeController extends Controller
     {
         return view('admin.home.index');
     }
+
+    /**
+     * Shows the index page.
+     *
+     * @return View
+     */
+    public function schedule(): View
+    {
+        return view('admin.home.schedule');
+    }
 }

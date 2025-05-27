@@ -1,5 +1,6 @@
 @import './components/header/header.css';
 @import './components/main/main.css';
+@import './components/menu/menu.css';
 @import './variables/colors.css';
 *
 {

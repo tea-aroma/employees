@@ -8,4 +8,16 @@
         <h1 class="header__heading">Employees</h1>
     </div>
 
+    <ul class="menu menu--style-default menu--type-default">
+
+        <li class="menu__item {{ \Illuminate\Support\Facades\Route::currentRouteName() !== 'admin.home.index' ?: 'active' }}">
+            <a href="{{ route('admin.home.index') }}" class="menu__link">List schedules</a>
+        </li>
+
+        <li class="menu__item {{ \Illuminate\Support\Facades\Route::currentRouteName() !== 'admin.home.schedule' ?: 'active' }}">
+            <a href="{{ route('admin.home.schedule') }}" class="menu__link">Schedule</a>
+        </li>
+
+    </ul>
+
 </header>
