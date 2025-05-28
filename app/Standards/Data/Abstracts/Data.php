@@ -119,7 +119,7 @@ abstract class Data
 
             if ($property->getType()->getName() === 'bool')
             {
-                $values[ $property->getName() ] = $values[ $property->getName() ] === 'false' ? 0 : 1;
+                $values[ $property->getName() ] = ( $values[ $property->getName() ] === 'false' || $values[ $property->getName() ] === '0' ) ? 0 : 1;
             }
 
             $this->{ $property->getName() } = $values[ $property->getName() ];
