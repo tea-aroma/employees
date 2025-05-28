@@ -3,15 +3,12 @@
 namespace App\Data\Schedules;
 
 
-use App\Data\Classifiers\ClassifierData;
 use App\Data\CompanyCars\CompanyCarData;
 use App\Data\Employees\EmployeeData;
 use App\Repositories\CompanyCarsRepository;
 use App\Repositories\EmployeesRepository;
 use App\Standards\Data\Abstracts\Data;
-use App\Standards\Data\Interfaces\ClassifierInterface;
 use App\Standards\Data\Traits\HasClassifier;
-use App\Standards\Enums\ClassifierModel;
 
 
 /**

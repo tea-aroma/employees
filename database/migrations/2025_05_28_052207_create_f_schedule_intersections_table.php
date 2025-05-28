@@ -15,7 +15,7 @@ return new class extends Migration
         $this->down();
 
         DB::unprepared(<<<PGSQL
-create or replace function f_schedule_intersections(x_company_car_id bigint, x_employee_id bigint, x_start_date timestamp, x_end_date timestamp)
+create or replace function f_schedule_intersections(x_company_car_id bigint, x_start_date timestamp, x_end_date timestamp)
     returns int
 as
 $$
@@ -34,8 +34,7 @@ begin
              left join public.company_cars cc on cc.id = s.company_car_id
              left join public.employees e on s.employee_id = e.id
     where s.company_car_id = x_company_car_id
-      and s.employee_id = x_employee_id
-      and ss.id = 2
+      and (ss.id != 4 and ss.id != 5)
       and (s.start_date < x_end_date and s.end_date > x_start_date);
 
     return result;

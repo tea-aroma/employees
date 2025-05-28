@@ -81,6 +81,13 @@ class SchedulesRepository extends Repository implements ReadInterface, FindInter
 
         $options = new ScheduleDataOptions($values->toArray());
 
+        $employee = ViewEmployeesRepository::query()->find($options->employee_id);
+
+        if ($employee->is_driver)
+        {
+            throw new \LogicException(ErrorMessage::DRIVER_IS_ASSIGNED->format($employee->full_name));
+        }
+
         if ($this->getIntersections($options) > 0)
         {
             throw new \LogicException(ErrorMessage::SCHEDULE_INTERSECTION->format($options->start_date, $options->end_date));
@@ -133,7 +140,7 @@ class SchedulesRepository extends Repository implements ReadInterface, FindInter
             throw new \LogicException(ErrorMessage::INVALID_ATTRIBUTES->format($options::class, ScheduleDataOptions::class));
         }
 
-        $result = DB::select('select f_schedule_intersections(?, ?, ?, ?);', [ $options->company_car_id, $options->employee_id, $options->start_date, $options->end_date ]);
+        $result = DB::select('select f_schedule_intersections(?, ?, ?);', [ $options->company_car_id, $options->start_date, $options->end_date ]);
 
         return $result[ 0 ]->f_schedule_intersections;
     }

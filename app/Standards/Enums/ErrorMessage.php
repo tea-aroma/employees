@@ -14,6 +14,8 @@ enum ErrorMessage: string
 
     case SCHEDULE_INTERSECTION = 'Schedule with interval (%s - %s) has intersection.';
 
+    case DRIVER_IS_ASSIGNED = 'The employee "%s" is already assigned to a driver.';
+
     /**
      * Formats the error message with specified arguments.
      *
