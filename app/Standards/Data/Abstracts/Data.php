@@ -117,7 +117,7 @@ abstract class Data
                 continue;
             }
 
-            if ($property->getType()->getName() === 'bool')
+            if ($property->getType()->getName() === 'bool' && !is_bool($values[ $property->getName() ]))
             {
                 $values[ $property->getName() ] = ( $values[ $property->getName() ] === 'false' || $values[ $property->getName() ] === '0' ) ? 0 : 1;
             }
