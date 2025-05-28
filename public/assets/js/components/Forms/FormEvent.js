@@ -10,4 +10,6 @@ export const FormEvent =
         INIT: 'event:init',
 
         SUBMIT: 'event:submit',
+
+        ENTER: 'event:enter',
     };

@@ -15,6 +15,8 @@ export class FormSettings
      * @property { string? } buttonText
      *
      * @property { Array<FormItemInterface>? } items
+     *
+     * @property { boolean? } withoutButton
      */
 
     /**
@@ -55,6 +57,13 @@ export class FormSettings
      * @type { Array<FormItemInterface> }
      */
     items = [];
+
+    /**
+     * @public
+     *
+     * @type { boolean }
+     */
+    withoutButton = false;
 
     /**
      * @constructor

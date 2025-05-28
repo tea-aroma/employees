@@ -2,6 +2,7 @@
 @import './components/main/main.css';
 @import './components/menu/menu.css';
 @import './components/forms/forms.css';
+@import './components/schedule-list/schedule-list.css';
 @import './variables/colors.css';
 *
 {

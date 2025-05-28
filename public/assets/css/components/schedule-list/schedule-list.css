@@ -1,0 +1,16 @@
+.schedule-list
+{
+
+}
+.schedule-list--type-default .schedule-list__item
+{
+    margin-top: 20px;
+    padding: 20px;
+    list-style: none;
+    border: 1px solid var(--gray);
+    border-radius: 4px;
+}
+.schedule-list--type-default .schedule-list__item:nth-child(even)
+{
+    background-color: var(--gray-opacity-01);
+}

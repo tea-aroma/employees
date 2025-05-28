@@ -72,6 +72,8 @@ export class Form
 
         this._domElement.addEventListener('click', this._submitHandler.bind(this));
 
+        this._domElement.addEventListener('change', this._enterHandler.bind(this));
+
         this._build();
     }
 
@@ -97,6 +99,20 @@ export class Form
     }
 
     /**
+     * Handles the event of the 'enter'.
+     *
+     * @protected
+     *
+     * @param { PointerEvent } event
+     *
+     * @return { void }
+     */
+    _enterHandler(event)
+    {
+        this.customEvents.execute(FormEvent.ENTER, event);
+    }
+
+    /**
      * Creates a dom element.
      *
      * @protected
@@ -105,7 +121,14 @@ export class Form
      */
     _createDomElement()
     {
-        return createHtmlElement('form', { class: this._settings.domElementClassName }, [ this._domButton ]);
+        const children = [];
+
+        if (!this._settings.withoutButton)
+        {
+            children.push(this._domButton);
+        }
+
+        return createHtmlElement('form', { class: this._settings.domElementClassName }, children);
     }
 
     /**
@@ -213,6 +236,18 @@ export class Form
      */
     toJson()
     {
+        return JSON.stringify(this.toObject());
+    }
+
+    /**
+     * Converts instance to json.
+     *
+     * @public
+     *
+     * @return { string }
+     */
+    toObject()
+    {
         const values = {};
 
         for (const [ id, input ] of this._items)
@@ -220,7 +255,7 @@ export class Form
             values[ input.getName() ] = input.getValue();
         }
 
-        return JSON.stringify(values);
+        return values;
     }
 
     /**
