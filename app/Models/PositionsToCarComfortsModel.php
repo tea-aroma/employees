@@ -2,16 +2,24 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 
 class PositionsToCarComfortsModel extends Model
 {
+    use HasFactory;
+
     /**
      * @var string
      */
     protected $table = 'positions_to_car_comforts';
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
 
     /**
      * @var string[]
