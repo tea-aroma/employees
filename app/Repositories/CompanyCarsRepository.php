@@ -83,6 +83,12 @@ class CompanyCarsRepository extends Repository implements ReadInterface, FindInt
                 return null;
             }
 
+            $this->cacheRepository->flush();
+
+            $options->start_date = date("Y-m-d H:i:s", strtotime($options->start_date));
+
+            $options->end_date = date("Y-m-d H:i:s", strtotime($options->end_date));
+
             DB::statement('create temporary table temp_available_company_cars as select * from f_available_company_cars(?, ?, ?)', [ $options->target_employee_id, $options->start_date, $options->end_date ]);
 
             $builder = $this->model->setTable('temp_available_company_cars')->newQuery();

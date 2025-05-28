@@ -79,6 +79,8 @@ class SchedulesRepository extends Repository implements ReadInterface, FindInter
             throw new \LogicException(ErrorMessage::INVALID_ATTRIBUTES->format($values::class, ScheduleDataAttributes::class));
         }
 
+        $values->schedule_status_id ??= 1;
+
         $options = new ScheduleDataOptions($values->toArray());
 
         $employee = ViewEmployeesRepository::query()->find($options->employee_id);
