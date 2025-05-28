@@ -3,11 +3,31 @@
 namespace App\Data\CompanyCars;
 
 
-use App\Data\Classifiers\ClassifierData;
 use App\Standards\Data\Interfaces\OptionsInterface;
 
 
 /**
  * @inheritDoc
  */
-class CompanyCarDataOptions extends ClassifierData implements OptionsInterface {}
+class CompanyCarDataOptions extends CompanyCarData implements OptionsInterface
+{
+    /**
+     * @var bool
+     */
+    public ?bool $only_available;
+
+    /**
+     * @var int|null
+     */
+    public ?int $target_employee_id;
+
+    /**
+     * @var string|null
+     */
+    public ?string $start_date;
+
+    /**
+     * @var string|null
+     */
+    public ?string $end_date;
+}
