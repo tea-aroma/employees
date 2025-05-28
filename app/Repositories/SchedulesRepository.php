@@ -77,7 +77,11 @@ class SchedulesRepository extends Repository implements ReadInterface, FindInter
             throw new \LogicException(ErrorMessage::INVALID_ATTRIBUTES->format($values::class, ScheduleDataAttributes::class));
         }
 
-        return $this->model->newQuery()->create($values->toArray());
+        $this->cacheRepository->flush();
+
+        $record = $this->model->newQuery()->create($values->toArray());
+
+        return ScheduleData::fromArray($record->toArray());
     }
 
     /**
@@ -93,6 +97,8 @@ class SchedulesRepository extends Repository implements ReadInterface, FindInter
         {
             throw new \LogicException(ErrorMessage::INVALID_ATTRIBUTES->format($values::class, ScheduleDataAttributes::class));
         }
+
+        $this->cacheRepository->flush();
 
         return $this->model->newQuery()->where('id', '=', $values->id)->update($values->toArray());
     }
