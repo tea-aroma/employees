@@ -12,11 +12,6 @@ use App\Standards\Data\Interfaces\OptionsInterface;
 class CompanyCarDataOptions extends CompanyCarData implements OptionsInterface
 {
     /**
-     * @var bool
-     */
-    public ?bool $only_available;
-
-    /**
      * @var int|null
      */
     public ?int $target_employee_id;

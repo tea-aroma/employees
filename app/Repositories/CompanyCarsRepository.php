@@ -3,14 +3,18 @@
 namespace App\Repositories;
 
 
+use App\Data\CompanyCars\AvailableCompanyCarData;
 use App\Data\CompanyCars\CompanyCarData;
+use App\Data\CompanyCars\CompanyCarDataOptions;
 use App\Models\CompanyCarsModel;
 use App\Standards\Data\Interfaces\OptionsInterface;
 use App\Standards\Enums\CacheTag;
+use App\Standards\Enums\ErrorMessage;
 use App\Standards\Repositories\Abstracts\Repository;
 use App\Standards\Repositories\Interfaces\FindInterface;
 use App\Standards\Repositories\Interfaces\ReadInterface;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 
 /**
@@ -39,7 +43,7 @@ class CompanyCarsRepository extends Repository implements ReadInterface, FindInt
     {
         return $this->cacheRepository->remember($options->toSha512(), function () use ($options)
         {
-            return $this->map($this->model::all(), CompanyCarData::class);
+            return CompanyCarData::map($this->model->newQuery()->get());
         });
     }
 
@@ -55,6 +59,35 @@ class CompanyCarsRepository extends Repository implements ReadInterface, FindInt
         return $this->cacheRepository->remember($id, function () use ($id)
         {
             return CompanyCarData::fromModel($this->model->newQuery()->find($id));
+        });
+    }
+
+    /**
+     * Gets the available cars.
+     *
+     * @param OptionsInterface $options
+     *
+     * @return Collection|null
+     */
+    public function getAvailable(OptionsInterface $options): ?Collection
+    {
+        if (!is_a($options, CompanyCarDataOptions::class))
+        {
+            throw new \LogicException(ErrorMessage::INVALID_ATTRIBUTES->format($options::class, CompanyCarDataOptions::class));
+        }
+
+        return $this->cacheRepository->remember($options->toSha512(), function () use ($options)
+        {
+            if (!isset($options->target_employee_id) || !isset($options->start_date) || !isset($options->end_date))
+            {
+                return null;
+            }
+
+            DB::statement('create temporary table temp_available_company_cars as select * from f_available_company_cars(?, ?, ?)', [ $options->target_employee_id, $options->start_date, $options->end_date ]);
+
+            $builder = $this->model->setTable('temp_available_company_cars')->newQuery();
+
+            return AvailableCompanyCarData::map($builder->get(), false);
         });
     }
 }

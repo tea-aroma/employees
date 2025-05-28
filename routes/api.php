@@ -18,6 +18,8 @@ Route::group([ 'prefix' => 'v1' ], function (Router $router)
     $router->group([ 'prefix' => 'company-cars', 'as' => 'company_cars.' ], function (Router $router)
     {
         $router->get('/list', [ \App\Http\API\CompanyCars\CompanyCarsController::class, 'list' ])->name('list');
+
+        $router->get('/available-list', [ \App\Http\API\CompanyCars\CompanyCarsController::class, 'availableList' ])->name('available-list');
     });
 
     $router->group([ 'prefix' => 'schedules', 'as' => 'schedules.' ], function (Router $router)

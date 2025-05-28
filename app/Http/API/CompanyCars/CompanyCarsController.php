@@ -41,4 +41,29 @@ class CompanyCarsController extends APIController
 
         return ApiResponse::fromArray([ 'message' => '', 'data' => $records->toArray() ]);
     }
+
+    /**
+     * Gets the list of available Company Cars.
+     *
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
+    public function availableList(Request $request): JsonResponse
+    {
+        try
+        {
+            $options = new CompanyCarDataOptions($request->all());
+
+            $records = CompanyCarsRepository::query()->getAvailable($options);
+        }
+        catch (\Exception $e)
+        {
+            Log::error($e->getMessage(), $e->getTrace());
+
+            return ApiResponse::fromArray([ 'message' => 'Invalid data', 'data' => null, 'status' => 400 ]);
+        }
+
+        return ApiResponse::fromArray([ 'message' => '', 'data' => $records?->toArray() ?? null ]);
+    }
 }
