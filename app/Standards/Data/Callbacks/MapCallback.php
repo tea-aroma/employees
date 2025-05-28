@@ -18,11 +18,19 @@ class MapCallback
     public string $namespace;
 
     /**
-     * @param string $namespace
+     * @var bool
      */
-    public function __construct(string $namespace)
+    public bool $withModel;
+
+    /**
+     * @param string $namespace
+     * @param bool   $withModel
+     */
+    public function __construct(string $namespace, bool $withModel)
     {
         $this->namespace = $namespace;
+
+        $this->withModel = $withModel;
     }
 
     /**
@@ -32,6 +40,11 @@ class MapCallback
      */
     public function __invoke(Model $model): Data
     {
+        if (!$this->withModel)
+        {
+            return $this->namespace::fromArray($model->toArray());
+        }
+
         return $this->namespace::fromModel($model);
     }
 }

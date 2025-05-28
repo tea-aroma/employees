@@ -70,12 +70,13 @@ abstract class Data
      * Maps each model of the specified collection to current type.
      *
      * @param Collection $collection
+     * @param bool       $withModel
      *
      * @return \Illuminate\Support\Collection
      */
-    public static function map(Collection $collection): \Illuminate\Support\Collection
+    public static function map(Collection $collection, bool $withModel = true): \Illuminate\Support\Collection
     {
-        return $collection->map(new MapCallback(static::class));
+        return $collection->map(new MapCallback(static::class, $withModel));
     }
 
     /**
