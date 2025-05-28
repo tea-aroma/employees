@@ -13,6 +13,7 @@ use App\Standards\Enums\ErrorMessage;
 use App\Standards\Repositories\Abstracts\Repository;
 use App\Standards\Repositories\Interfaces\FindInterface;
 use App\Standards\Repositories\Interfaces\ReadInterface;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -85,15 +86,32 @@ class CompanyCarsRepository extends Repository implements ReadInterface, FindInt
 
             $this->cacheRepository->flush();
 
-            $options->start_date = date("Y-m-d H:i:s", strtotime($options->start_date));
-
-            $options->end_date = date("Y-m-d H:i:s", strtotime($options->end_date));
-
-            DB::statement('create temporary table temp_available_company_cars as select * from f_available_company_cars(?, ?, ?)', [ $options->target_employee_id, $options->start_date, $options->end_date ]);
-
-            $builder = $this->model->setTable('temp_available_company_cars')->newQuery();
+            $builder = $this->getAvailableBuilder($options);
 
             return AvailableCompanyCarData::map($builder->get(), false);
         });
+    }
+
+    /**
+     * Gets the builder for available cars table.
+     *
+     * @param OptionsInterface $options
+     *
+     * @return Builder
+     */
+    public function getAvailableBuilder(OptionsInterface $options): Builder
+    {
+        if (!is_a($options, CompanyCarDataOptions::class))
+        {
+            throw new \LogicException(ErrorMessage::INVALID_ATTRIBUTES->format($options::class, CompanyCarDataOptions::class));
+        }
+
+        $options->start_date = date("Y-m-d H:i:s", strtotime($options->start_date));
+
+        $options->end_date = date("Y-m-d H:i:s", strtotime($options->end_date));
+
+        DB::statement('create temporary table temp_available_company_cars as select * from f_available_company_cars(?, ?, ?)', [ $options->target_employee_id, $options->start_date, $options->end_date ]);
+
+        return $this->model->setTable('temp_available_company_cars')->newQuery();
     }
 }
