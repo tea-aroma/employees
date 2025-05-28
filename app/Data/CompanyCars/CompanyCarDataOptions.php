@@ -25,4 +25,15 @@ class CompanyCarDataOptions extends CompanyCarData implements OptionsInterface
      * @var string|null
      */
     public ?string $end_date;
+
+    /**
+     * @var int
+     */
+    public int $car_comfort_id;
+
+    /**
+     * @var int
+     */
+    public int $car_model_id;
+
 }

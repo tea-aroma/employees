@@ -15,7 +15,7 @@ return new class extends Migration
         $this->down();
 
         DB::unprepared(<<<PGSQL
-create function f_available_company_cars(x_employee_id bigint, x_start_date timestamp, x_end_date timestamp)
+create function f_available_company_cars(x_employee_id bigint, x_start_date timestamp without time zone, x_end_date timestamp without time zone)
     returns table
             (
                 id               bigint,
@@ -24,13 +24,16 @@ create function f_available_company_cars(x_employee_id bigint, x_start_date time
                 car_status_id    bigint,
                 employee_id      bigint,
                 position_id      bigint,
+                car_comfort_id   bigint,
+                car_model_id     bigint,
                 company_car_name text,
-                license_plate    varchar,
-                vin              varchar,
-                mileage          int,
-                year             int,
-                sort_order       int
+                license_plate    character varying,
+                vin              character varying,
+                mileage          integer,
+                year             integer,
+                sort_order       integer
             )
+    language plpgsql
 as
 $$
 begin
@@ -45,6 +48,8 @@ begin
                cc.car_status_id,
                e2.id                                                                            as employee_id,
                p.id                                                                             as position_id,
+               c.car_comfort_id,
+               c.car_model_id,
                concat(cc.license_plate, ' | ', e.first_name, ' ', e.last_name, ' | ', cc2.name) as company_car_name,
                cc.license_plate,
                cc.vin,
@@ -64,10 +69,11 @@ begin
                                and s.start_date < x_end_date
                                and s.end_date > x_start_date
         where ptcc.id is not null
-          and s.id is null and x_employee_id != cc.employee_id
+          and s.id is null
+          and x_employee_id != cc.employee_id
         order by cc.sort_order;
 end;
-$$ language plpgsql;
+$$;
 PGSQL
 );
     }

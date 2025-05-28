@@ -88,6 +88,16 @@ class CompanyCarsRepository extends Repository implements ReadInterface, FindInt
 
             $builder = $this->getAvailableBuilder($options);
 
+            if (isset($options->car_comfort_id))
+            {
+                $builder = $builder->where('car_comfort_id', $options->car_comfort_id);
+            }
+
+            if (isset($options->car_model_id))
+            {
+                $builder = $builder->where('car_model_id', $options->car_model_id);
+            }
+
             return AvailableCompanyCarData::map($builder->get(), false);
         });
     }

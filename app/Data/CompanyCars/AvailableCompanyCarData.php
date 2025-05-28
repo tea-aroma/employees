@@ -42,6 +42,16 @@ class AvailableCompanyCarData extends Data
     public int $position_id;
 
     /**
+     * @var int
+     */
+    public int $car_comfort_id;
+
+    /**
+     * @var int
+     */
+    public int $car_model_id;
+
+    /**
      * @var string
      */
     public string $company_car_name;
