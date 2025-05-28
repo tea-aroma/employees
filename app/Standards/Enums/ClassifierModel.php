@@ -54,4 +54,24 @@ enum ClassifierModel: string
     {
         return strtolower($this->name) . '_' . $key;
     }
+
+    /**
+     * Gets a case by the specified name.
+     *
+     * @param string $name
+     *
+     * @return ClassifierModel|null
+     */
+    public static function fromName(string $name): ?ClassifierModel
+    {
+        foreach (self::cases() as $case)
+        {
+            if ($case->name === $name)
+            {
+                return $case;
+            }
+        }
+
+        return null;
+    }
 }
