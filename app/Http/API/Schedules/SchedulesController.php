@@ -4,9 +4,10 @@ namespace App\Http\API\Schedules;
 
 
 use App\Data\Schedules\ScheduleDataAttributes;
-use App\Data\Schedules\ScheduleDataOptions;
+use App\Data\ViewSchedules\ViewScheduleDataOptions;
 use App\Http\API\APIController;
 use App\Repositories\SchedulesRepository;
+use App\Repositories\ViewSchedulesRepository;
 use App\Standards\Api\Classes\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -29,9 +30,9 @@ class SchedulesController extends APIController
     {
         try
         {
-            $options = new ScheduleDataOptions($request->all());
+            $options = new ViewScheduleDataOptions($request->all());
 
-            $records = SchedulesRepository::query()->records($options);
+            $records = ViewSchedulesRepository::query()->records($options);
         }
         catch (\Exception $e)
         {
