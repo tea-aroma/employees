@@ -1,6 +1,7 @@
 @import './components/header/header.css';
 @import './components/main/main.css';
 @import './components/menu/menu.css';
+@import './components/forms/forms.css';
 @import './variables/colors.css';
 *
 {
@@ -15,7 +16,7 @@ body
 }
 body
 {
-    font-family: 'Verdana', sans-serif;
+    font: 400 16px 'Roboto', sans-serif;
     background-color: var(--ultra-light-gray);
     color: var(--dark);
 }
