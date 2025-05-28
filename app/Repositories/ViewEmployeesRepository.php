@@ -48,9 +48,12 @@ class ViewEmployeesRepository extends Repository implements ReadInterface, FindI
         {
             $builder = $this->model->newQuery();
 
-            $builder->where('is_driver', '=', $options->is_driver);
+            if (isset($options->is_driver))
+            {
+                $builder->where('is_driver', '=', $options->is_driver);
+            }
 
-            return $this->map($builder->get(), ViewEmployeeData::class);
+            return ViewEmployeeData::map($builder->get());
         });
     }
 

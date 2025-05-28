@@ -15,5 +15,5 @@ class ViewEmployeeDataOptions extends ClassifierData implements OptionsInterface
     /**
      * @var bool
      */
-    public bool $is_driver = true;
+    public bool $is_driver;
 }

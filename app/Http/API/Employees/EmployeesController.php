@@ -9,6 +9,7 @@ use App\Repositories\ViewEmployeesRepository;
 use App\Standards\Api\Classes\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 
 /**
@@ -17,7 +18,7 @@ use Illuminate\Http\Request;
 class EmployeesController extends APIController
 {
     /**
-     * Gets a list of employees.
+     * Gets a list of Employees.
      *
      * @param Request $request
      *
@@ -25,9 +26,18 @@ class EmployeesController extends APIController
      */
     public function list(Request $request): JsonResponse
     {
-        $options = new ViewEmployeeDataOptions($request->all());
+        try
+        {
+            $options = new ViewEmployeeDataOptions($request->all());
 
-        $records = ViewEmployeesRepository::query()->records($options);
+            $records = ViewEmployeesRepository::query()->records($options);
+        }
+        catch (\Exception $e)
+        {
+            Log::error($e->getMessage(), $e->getTrace());
+
+            return ApiResponse::fromArray([ 'message' => 'Invalid data', 'data' => null, 'status' => 400 ]);
+        }
 
         return ApiResponse::fromArray([ 'message' => '', 'data' => $records->toArray() ]);
     }
