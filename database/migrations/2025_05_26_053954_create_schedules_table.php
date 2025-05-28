@@ -18,8 +18,8 @@ return new class extends Migration
             $table->foreignId('employee_id')->references('id')->on('employees')->cascadeOnDelete();
             $table->foreignId('trip_type_id')->references('id')->on('trip_types')->cascadeOnDelete();
             $table->string('description');
-            $table->timestamp('start_time')->useCurrent();
-            $table->timestamp('end_time');
+            $table->timestamp('start_date')->useCurrent();
+            $table->timestamp('end_date');
             $table->timestamps();
         });
     }

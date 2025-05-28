@@ -49,12 +49,12 @@ class ScheduleData extends Data
     /**
      * @var string
      */
-    public string $start_time;
+    public string $start_date;
 
     /**
      * @var string
      */
-    public string $end_time;
+    public string $end_date;
 
     /**
      * @var string

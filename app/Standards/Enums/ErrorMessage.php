@@ -12,6 +12,8 @@ enum ErrorMessage: string
 
     case INVALID_OPTIONS = 'Invalid options for "%s": expected instance of "%s".';
 
+    case SCHEDULE_INTERSECTION = 'Schedule with interval (%s - %s) has intersection.';
+
     /**
      * Formats the error message with specified arguments.
      *

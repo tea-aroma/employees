@@ -22,8 +22,8 @@ class SchedulesModel extends Model
             'company_car_id',
             'employee_id',
             'trip_type_id',
-            'start_time',
-            'end_time',
+            'start_date',
+            'end_date',
             'description',
         ];
 
